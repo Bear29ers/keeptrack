@@ -37,6 +37,7 @@ module.exports = {
   rules: {
     'arrow-body-style': 'off', // アロー関数の波括弧は必要に応じて記載する
     'no-use-before-define': 'off', // 定義より前に使用しない
+    'no-void': 'off', // void演算子の使用を許可しない
     'no-restricted-syntax': [
       // 禁止構文の設定（Enum）
       'error',
