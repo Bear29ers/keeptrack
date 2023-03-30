@@ -59,6 +59,8 @@ module.exports = {
     '@typescript-eslint/no-unsafe-call': 'warn',
     '@typescript-eslint/no-unsafe-member-access': 'warn',
     '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-inferrable-types': 'off', // 型推論できる変数宣言初期化は型を書かなくても良い
+    '@typescript-eslint/lines-between-class-members': 'off', // クラス定義において、メソッド間に空白行を入れる
     'import/order': [
       'error',
       {
