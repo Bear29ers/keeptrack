@@ -55,12 +55,22 @@ module.exports = {
     'react/display-name': 'off', // コンポーネント定義に表示名が必要（memo）
     'react-hooks/rules-of-hooks': 'error', // react-hooksのルール
     'react-hooks/exhaustive-deps': 'warn', // 依存関係を指定せずに関数を記述する
-    '@typescript-eslint/no-unsafe-assignment': 'warn',
-    '@typescript-eslint/no-unsafe-call': 'warn',
-    '@typescript-eslint/no-unsafe-member-access': 'warn',
-    '@typescript-eslint/no-unused-vars': 'off',
+    '@typescript-eslint/no-unsafe-assignment': 'warn', // any型の代入を禁止するルール
+    '@typescript-eslint/no-unsafe-call': 'warn', // any型に対する関数呼び出し禁止
+    '@typescript-eslint/no-unsafe-member-access': 'warn', // any型に対するメンバ呼び出し禁止
+    '@typescript-eslint/no-unused-vars': [
+      // 使用しない変数に関するルール
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+        destructuredArrayIgnorePattern: '^_',
+      },
+    ],
     '@typescript-eslint/no-inferrable-types': 'off', // 型推論できる変数宣言初期化は型を書かなくても良い
     '@typescript-eslint/lines-between-class-members': 'off', // クラス定義において、メソッド間に空白行を入れる
+    'jsx-a11y/label-has-associated-control': 'off', // labelとinputの結びつけ設定
     'import/order': [
       'error',
       {

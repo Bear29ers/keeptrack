@@ -1,10 +1,13 @@
-import MOCK_PROJECTS from './MockProjects';
+import { FC } from 'react';
 
-const ProjectsPage = () => {
+import MOCK_PROJECTS from './MockProjects';
+import ProjectList from './ProjectList';
+
+const ProjectsPage: FC = () => {
   return (
     <>
       <h1>Projects</h1>
-      <pre>{JSON.stringify(MOCK_PROJECTS, null, ' ')}</pre>
+      <ProjectList projects={MOCK_PROJECTS} />
     </>
   );
 };
