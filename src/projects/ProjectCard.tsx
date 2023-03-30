@@ -1,3 +1,5 @@
+import { FC } from 'react';
+
 import Project from './Project';
 
 interface ProjectCardProps {
@@ -8,7 +10,7 @@ const formatDescription = (description: string) => {
   return `${description.substring(0, 60)}...`;
 };
 
-const ProjectCard = (props: ProjectCardProps) => {
+const ProjectCard: FC<ProjectCardProps> = (props) => {
   const { project } = props;
   const handleEditClick = (projectBeingEdited: Project) => {
     console.log(projectBeingEdited);
