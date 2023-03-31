@@ -17,7 +17,8 @@ const ProjectList: FC<ProjectListProps> = ({ projects }) => {
 
   const items = projects.map((project) => (
     <div key={project.id} className='cols-sm'>
-      {project === projectBeingEdited ? <ProjectForm /> : <ProjectCard project={project} onEdit={handleEdit} />}
+      <ProjectCard project={project} onEdit={handleEdit} />
+      <ProjectForm />
     </div>
   ));
   return <div className='row'>{items}</div>;
