@@ -15,11 +15,19 @@ const ProjectList: FC<ProjectListProps> = ({ projects }) => {
     setProjectBeingEdited(project);
   };
 
+  const cancelEditing = () => {
+    setProjectBeingEdited({});
+  };
+
   return (
     <ul className='row'>
       {projects.map((project) => (
         <div key={project.id} className='cols-sm'>
-          {project === projectBeingEdited ? <ProjectForm /> : <ProjectCard project={project} onEdit={handleEdit} />}
+          {project === projectBeingEdited ? (
+            <ProjectForm onCancel={cancelEditing} />
+          ) : (
+            <ProjectCard project={project} onEdit={handleEdit} />
+          )}
         </div>
       ))}
     </ul>

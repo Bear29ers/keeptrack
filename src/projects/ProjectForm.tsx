@@ -1,6 +1,10 @@
 import { FC } from 'react';
 
-const ProjectForm: FC = () => {
+interface ProjectFormProps {
+  onCancel: () => void;
+}
+
+const ProjectForm: FC<ProjectFormProps> = ({ onCancel }) => {
   return (
     <form className='input-group vertical'>
       <label htmlFor='name'>Project Name</label>
@@ -20,7 +24,7 @@ const ProjectForm: FC = () => {
           Save
         </button>
         <span />
-        <button type='button' className='bordered medium'>
+        <button type='button' className='bordered medium' onClick={onCancel}>
           cancel
         </button>
       </div>
