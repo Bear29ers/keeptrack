@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, useState } from 'react';
 
 import Project from './Project';
 import ProjectCard from './ProjectCard';
@@ -9,16 +9,17 @@ interface ProjectListProps {
 }
 
 const ProjectList: FC<ProjectListProps> = ({ projects }) => {
+  const [projectBeingEdited, setProjectBeingEdited] = useState({});
+
   const handleEdit = (project: Project) => {
-    console.log(project);
+    setProjectBeingEdited(project);
   };
 
   return (
     <ul className='row'>
       {projects.map((project) => (
         <div key={project.id} className='cols-sm'>
-          <ProjectCard project={project} onEdit={handleEdit} />
-          <ProjectForm />
+          {project === projectBeingEdited ? <ProjectForm /> : <ProjectCard project={project} onEdit={handleEdit} />}
         </div>
       ))}
     </ul>
