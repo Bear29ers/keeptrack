@@ -4,6 +4,7 @@ import Project from './Project';
 
 interface ProjectCardProps {
   project: Project;
+  onEdit: (project: Project) => void;
 }
 
 const formatDescription = (description: string) => {
@@ -11,9 +12,9 @@ const formatDescription = (description: string) => {
 };
 
 const ProjectCard: FC<ProjectCardProps> = (props) => {
-  const { project } = props;
+  const { project, onEdit } = props;
   const handleEditClick = (projectBeingEdited: Project) => {
-    console.log(projectBeingEdited);
+    onEdit(projectBeingEdited);
   };
 
   return (
