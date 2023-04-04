@@ -36,12 +36,14 @@ const parseJSON = (res: Response) => {
   return res.json();
 };
 
+/*
 const delay = (ms: number) => {
   return (x: any): Promise<any> => {
     // eslint-disable-next-line no-promise-executor-return
     return new Promise((resolve) => setTimeout(() => resolve(x), ms));
   };
 };
+*/
 
 const convertToProjectModel = (item: ProjectInfo): Project => {
   return new Project(item);
@@ -66,6 +68,22 @@ const projectAPI = {
           throw new Error('There was an error retrieving the projects. Please try again.');
         })
     );
+  },
+  put(project: Project) {
+    return fetch(`${url}/${Number(project.id)}`, {
+      method: 'PUT',
+      body: JSON.stringify(project),
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    })
+      .then(checkStatus)
+      .then(parseJSON)
+      .catch((error: TypeError) => {
+        // eslint-disable-next-line @typescript-eslint/restrict-template-expressions
+        console.log(`log client error${error}`);
+        throw new Error('There was an error updating the project. Please try again.');
+      });
   },
 };
 

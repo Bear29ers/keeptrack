@@ -37,10 +37,19 @@ const ProjectsPage: FC = () => {
   };
 
   const saveProject = (project: Project) => {
-    const updatedProjects = projects.map((p: Project) => {
-      return p.id === project.id ? project : p;
-    });
-    setProjects(updatedProjects);
+    projectAPI
+      .put(project)
+      .then((updatedProject: Project) => {
+        const updatedProjects = projects.map((p: Project) => {
+          return p.id === project.id ? new Project(updatedProject) : p;
+        });
+        setProjects(updatedProjects);
+      })
+      .catch((e: unknown) => {
+        if (e instanceof Error) {
+          setError(e.message);
+        }
+      });
   };
 
   return (
