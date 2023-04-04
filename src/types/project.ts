@@ -10,3 +10,9 @@ export type ProjectInfo = {
 };
 
 export type SignedOn = Date | string;
+
+export type FormErrors = {
+  name: string;
+  description: string;
+  budget: string;
+};
