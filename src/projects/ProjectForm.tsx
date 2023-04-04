@@ -2,6 +2,8 @@ import { FC, SyntheticEvent, useState } from 'react';
 
 import Project from './Project';
 
+import type { FormErrors } from '../types/project';
+
 interface ProjectFormProps {
   project: Project;
   onSave: (project: Project) => void;
@@ -10,9 +12,40 @@ interface ProjectFormProps {
 
 const ProjectForm: FC<ProjectFormProps> = ({ project: initialProject, onSave, onCancel }) => {
   const [project, setProject] = useState(initialProject);
+  const [errors, setErrors] = useState<FormErrors>({
+    name: '',
+    description: '',
+    budget: '',
+  });
+
+  const validate = (pj: Project): FormErrors => {
+    const formErrors: FormErrors = { name: '', description: '', budget: '' };
+    if (pj.name.length === 0) {
+      formErrors.name = 'Name is required';
+    }
+
+    if (pj.name.length > 0 && pj.name.length < 3) {
+      formErrors.name = 'Name needs to be at least 3 characters.';
+    }
+
+    if (pj.description.length === 0) {
+      formErrors.description = 'Description is required.';
+    }
+
+    if (pj.budget === 0) {
+      formErrors.budget = 'Budget must be more than $0.';
+    }
+
+    return formErrors;
+  };
+
+  const isValid = () => {
+    return errors.name.length === 0 && errors.description.length === 0 && errors.budget.length === 0;
+  };
 
   const handleSubmit = (event: SyntheticEvent) => {
     event.preventDefault();
+    if (!isValid()) return;
     onSave(project);
   };
 
@@ -41,12 +74,20 @@ const ProjectForm: FC<ProjectFormProps> = ({ project: initialProject, onSave, on
       updatedProject = new Project({ ...p, ...change });
       return updatedProject;
     });
+
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-return
+    setErrors(() => validate(updatedProject));
   };
 
   return (
     <form className='input-group vertical' onSubmit={handleSubmit}>
       <label htmlFor='name'>Project Name</label>
       <input type='text' name='name' placeholder='enter name' value={project.name} onChange={handleChange} />
+      {errors.name.length > 0 && (
+        <div className='card error'>
+          <p>{errors.name}</p>
+        </div>
+      )}
 
       <label htmlFor='description'>Project Description</label>
       <textarea
@@ -55,9 +96,19 @@ const ProjectForm: FC<ProjectFormProps> = ({ project: initialProject, onSave, on
         value={project.description}
         onChange={handleChange}
       />
+      {errors.description.length > 0 && (
+        <div className='card error'>
+          <p>{errors.description}</p>
+        </div>
+      )}
 
       <label htmlFor='budget'>Project Budget</label>
       <input type='number' name='budget' placeholder='enter budget' value={project.budget} onChange={handleChange} />
+      {errors.budget.length > 0 && (
+        <div className='card error'>
+          <p>{errors.budget}</p>
+        </div>
+      )}
 
       <label htmlFor='isActive'>Active?</label>
       <input type='checkbox' name='isActive' checked={project.isActive} onChange={handleChange} />
