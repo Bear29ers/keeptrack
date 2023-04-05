@@ -6,7 +6,7 @@ import ProjectList from './ProjectList';
 
 const ProjectsPage: FC = () => {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | undefined>(undefined);
   const [currentPage, setCurrentPage] = useState(1);
 

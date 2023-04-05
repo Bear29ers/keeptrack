@@ -85,6 +85,9 @@ const projectAPI = {
         throw new Error('There was an error updating the project. Please try again.');
       });
   },
+  find(id: number) {
+    return fetch(`${url}/${id}`).then(checkStatus).then(parseJSON).then(convertToProjectModel);
+  },
 };
 
 export default projectAPI;
