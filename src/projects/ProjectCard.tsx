@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Link } from 'react-router-dom';
 
 import Project from './Project';
 
@@ -21,11 +22,13 @@ const ProjectCard: FC<ProjectCardProps> = (props) => {
     <div className='card'>
       <img src={project.imageUrl} alt={project.name} />
       <section className='section dark'>
-        <h5 className='strong'>
-          <strong>{project.name}</strong>
-        </h5>
-        <p>{formatDescription(project.description)}</p>
-        <p>Budget: {project.budget.toLocaleString()}</p>
+        <Link to={`/projects/${Number(project.id)}`}>
+          <h5 className='strong'>
+            <strong>{project.name}</strong>
+          </h5>
+          <p>{formatDescription(project.description)}</p>
+          <p>Budget: {project.budget.toLocaleString()}</p>
+        </Link>
         <button
           type='button'
           className='bordered'
